@@ -1,0 +1,422 @@
+[
+  {
+    "city_code": "13101",
+    "city_name": "千代田区",
+    "prefecture_name": "東京都",
+    "year": 2022,
+    "avg_price_per_sqm": 2350000.0,
+    "min_price_per_sqm": 1200000,
+    "max_price_per_sqm": 5800000,
+    "record_count": 42
+  },
+  {
+    "city_code": "13101",
+    "city_name": "千代田区",
+    "prefecture_name": "東京都",
+    "year": 2023,
+    "avg_price_per_sqm": 2480000.0,
+    "min_price_per_sqm": 1280000,
+    "max_price_per_sqm": 6100000,
+    "record_count": 42
+  },
+  {
+    "city_code": "13101",
+    "city_name": "千代田区",
+    "prefecture_name": "東京都",
+    "year": 2024,
+    "avg_price_per_sqm": 2610000.0,
+    "min_price_per_sqm": 1350000,
+    "max_price_per_sqm": 6400000,
+    "record_count": 43
+  },
+  {
+    "city_code": "13104",
+    "city_name": "新宿区",
+    "prefecture_name": "東京都",
+    "year": 2022,
+    "avg_price_per_sqm": 1180000.0,
+    "min_price_per_sqm": 620000,
+    "max_price_per_sqm": 3500000,
+    "record_count": 58
+  },
+  {
+    "city_code": "13104",
+    "city_name": "新宿区",
+    "prefecture_name": "東京都",
+    "year": 2023,
+    "avg_price_per_sqm": 1230000.0,
+    "min_price_per_sqm": 650000,
+    "max_price_per_sqm": 3680000,
+    "record_count": 58
+  },
+  {
+    "city_code": "13104",
+    "city_name": "新宿区",
+    "prefecture_name": "東京都",
+    "year": 2024,
+    "avg_price_per_sqm": 1295000.0,
+    "min_price_per_sqm": 680000,
+    "max_price_per_sqm": 3850000,
+    "record_count": 59
+  },
+  {
+    "city_code": "13109",
+    "city_name": "品川区",
+    "prefecture_name": "東京都",
+    "year": 2022,
+    "avg_price_per_sqm": 880000.0,
+    "min_price_per_sqm": 450000,
+    "max_price_per_sqm": 2200000,
+    "record_count": 71
+  },
+  {
+    "city_code": "13109",
+    "city_name": "品川区",
+    "prefecture_name": "東京都",
+    "year": 2023,
+    "avg_price_per_sqm": 930000.0,
+    "min_price_per_sqm": 480000,
+    "max_price_per_sqm": 2350000,
+    "record_count": 72
+  },
+  {
+    "city_code": "13109",
+    "city_name": "品川区",
+    "prefecture_name": "東京都",
+    "year": 2024,
+    "avg_price_per_sqm": 985000.0,
+    "min_price_per_sqm": 510000,
+    "max_price_per_sqm": 2480000,
+    "record_count": 72
+  },
+  {
+    "city_code": "13113",
+    "city_name": "渋谷区",
+    "prefecture_name": "東京都",
+    "year": 2022,
+    "avg_price_per_sqm": 1420000.0,
+    "min_price_per_sqm": 750000,
+    "max_price_per_sqm": 4200000,
+    "record_count": 47
+  },
+  {
+    "city_code": "13113",
+    "city_name": "渋谷区",
+    "prefecture_name": "東京都",
+    "year": 2023,
+    "avg_price_per_sqm": 1505000.0,
+    "min_price_per_sqm": 790000,
+    "max_price_per_sqm": 4450000,
+    "record_count": 47
+  },
+  {
+    "city_code": "13113",
+    "city_name": "渋谷区",
+    "prefecture_name": "東京都",
+    "year": 2024,
+    "avg_price_per_sqm": 1580000.0,
+    "min_price_per_sqm": 830000,
+    "max_price_per_sqm": 4650000,
+    "record_count": 48
+  },
+  {
+    "city_code": "13120",
+    "city_name": "板橋区",
+    "prefecture_name": "東京都",
+    "year": 2022,
+    "avg_price_per_sqm": 450000.0,
+    "min_price_per_sqm": 280000,
+    "max_price_per_sqm": 920000,
+    "record_count": 85
+  },
+  {
+    "city_code": "13120",
+    "city_name": "板橋区",
+    "prefecture_name": "東京都",
+    "year": 2023,
+    "avg_price_per_sqm": 465000.0,
+    "min_price_per_sqm": 290000,
+    "max_price_per_sqm": 950000,
+    "record_count": 85
+  },
+  {
+    "city_code": "13120",
+    "city_name": "板橋区",
+    "prefecture_name": "東京都",
+    "year": 2024,
+    "avg_price_per_sqm": 472000.0,
+    "min_price_per_sqm": 295000,
+    "max_price_per_sqm": 960000,
+    "record_count": 86
+  },
+  {
+    "city_code": "13201",
+    "city_name": "八王子市",
+    "prefecture_name": "東京都",
+    "year": 2022,
+    "avg_price_per_sqm": 195000.0,
+    "min_price_per_sqm": 80000,
+    "max_price_per_sqm": 480000,
+    "record_count": 120
+  },
+  {
+    "city_code": "13201",
+    "city_name": "八王子市",
+    "prefecture_name": "東京都",
+    "year": 2023,
+    "avg_price_per_sqm": 198000.0,
+    "min_price_per_sqm": 82000,
+    "max_price_per_sqm": 490000,
+    "record_count": 121
+  },
+  {
+    "city_code": "13201",
+    "city_name": "八王子市",
+    "prefecture_name": "東京都",
+    "year": 2024,
+    "avg_price_per_sqm": 196000.0,
+    "min_price_per_sqm": 81000,
+    "max_price_per_sqm": 485000,
+    "record_count": 121
+  },
+  {
+    "city_code": "14100",
+    "city_name": "横浜市",
+    "prefecture_name": "神奈川県",
+    "year": 2022,
+    "avg_price_per_sqm": 320000.0,
+    "min_price_per_sqm": 95000,
+    "max_price_per_sqm": 1200000,
+    "record_count": 210
+  },
+  {
+    "city_code": "14100",
+    "city_name": "横浜市",
+    "prefecture_name": "神奈川県",
+    "year": 2023,
+    "avg_price_per_sqm": 338000.0,
+    "min_price_per_sqm": 100000,
+    "max_price_per_sqm": 1260000,
+    "record_count": 212
+  },
+  {
+    "city_code": "14100",
+    "city_name": "横浜市",
+    "prefecture_name": "神奈川県",
+    "year": 2024,
+    "avg_price_per_sqm": 358000.0,
+    "min_price_per_sqm": 105000,
+    "max_price_per_sqm": 1320000,
+    "record_count": 213
+  },
+  {
+    "city_code": "14130",
+    "city_name": "川崎市",
+    "prefecture_name": "神奈川県",
+    "year": 2022,
+    "avg_price_per_sqm": 410000.0,
+    "min_price_per_sqm": 160000,
+    "max_price_per_sqm": 1100000,
+    "record_count": 143
+  },
+  {
+    "city_code": "14130",
+    "city_name": "川崎市",
+    "prefecture_name": "神奈川県",
+    "year": 2023,
+    "avg_price_per_sqm": 432000.0,
+    "min_price_per_sqm": 168000,
+    "max_price_per_sqm": 1150000,
+    "record_count": 144
+  },
+  {
+    "city_code": "14130",
+    "city_name": "川崎市",
+    "prefecture_name": "神奈川県",
+    "year": 2024,
+    "avg_price_per_sqm": 450000.0,
+    "min_price_per_sqm": 175000,
+    "max_price_per_sqm": 1190000,
+    "record_count": 144
+  },
+  {
+    "city_code": "14201",
+    "city_name": "相模原市",
+    "prefecture_name": "神奈川県",
+    "year": 2022,
+    "avg_price_per_sqm": 175000.0,
+    "min_price_per_sqm": 70000,
+    "max_price_per_sqm": 420000,
+    "record_count": 98
+  },
+  {
+    "city_code": "14201",
+    "city_name": "相模原市",
+    "prefecture_name": "神奈川県",
+    "year": 2023,
+    "avg_price_per_sqm": 178000.0,
+    "min_price_per_sqm": 71000,
+    "max_price_per_sqm": 428000,
+    "record_count": 98
+  },
+  {
+    "city_code": "14201",
+    "city_name": "相模原市",
+    "prefecture_name": "神奈川県",
+    "year": 2024,
+    "avg_price_per_sqm": 174000.0,
+    "min_price_per_sqm": 70000,
+    "max_price_per_sqm": 420000,
+    "record_count": 97
+  },
+  {
+    "city_code": "11100",
+    "city_name": "さいたま市",
+    "prefecture_name": "埼玉県",
+    "year": 2022,
+    "avg_price_per_sqm": 265000.0,
+    "min_price_per_sqm": 95000,
+    "max_price_per_sqm": 680000,
+    "record_count": 168
+  },
+  {
+    "city_code": "11100",
+    "city_name": "さいたま市",
+    "prefecture_name": "埼玉県",
+    "year": 2023,
+    "avg_price_per_sqm": 278000.0,
+    "min_price_per_sqm": 99000,
+    "max_price_per_sqm": 710000,
+    "record_count": 169
+  },
+  {
+    "city_code": "11100",
+    "city_name": "さいたま市",
+    "prefecture_name": "埼玉県",
+    "year": 2024,
+    "avg_price_per_sqm": 292000.0,
+    "min_price_per_sqm": 103000,
+    "max_price_per_sqm": 740000,
+    "record_count": 170
+  },
+  {
+    "city_code": "11201",
+    "city_name": "川越市",
+    "prefecture_name": "埼玉県",
+    "year": 2022,
+    "avg_price_per_sqm": 148000.0,
+    "min_price_per_sqm": 60000,
+    "max_price_per_sqm": 350000,
+    "record_count": 76
+  },
+  {
+    "city_code": "11201",
+    "city_name": "川越市",
+    "prefecture_name": "埼玉県",
+    "year": 2023,
+    "avg_price_per_sqm": 152000.0,
+    "min_price_per_sqm": 62000,
+    "max_price_per_sqm": 360000,
+    "record_count": 76
+  },
+  {
+    "city_code": "11201",
+    "city_name": "川越市",
+    "prefecture_name": "埼玉県",
+    "year": 2024,
+    "avg_price_per_sqm": 155000.0,
+    "min_price_per_sqm": 63000,
+    "max_price_per_sqm": 368000,
+    "record_count": 77
+  },
+  {
+    "city_code": "12100",
+    "city_name": "千葉市",
+    "prefecture_name": "千葉県",
+    "year": 2022,
+    "avg_price_per_sqm": 185000.0,
+    "min_price_per_sqm": 65000,
+    "max_price_per_sqm": 480000,
+    "record_count": 145
+  },
+  {
+    "city_code": "12100",
+    "city_name": "千葉市",
+    "prefecture_name": "千葉県",
+    "year": 2023,
+    "avg_price_per_sqm": 190000.0,
+    "min_price_per_sqm": 67000,
+    "max_price_per_sqm": 492000,
+    "record_count": 146
+  },
+  {
+    "city_code": "12100",
+    "city_name": "千葉市",
+    "prefecture_name": "千葉県",
+    "year": 2024,
+    "avg_price_per_sqm": 197000.0,
+    "min_price_per_sqm": 69000,
+    "max_price_per_sqm": 510000,
+    "record_count": 147
+  },
+  {
+    "city_code": "12204",
+    "city_name": "船橋市",
+    "prefecture_name": "千葉県",
+    "year": 2022,
+    "avg_price_per_sqm": 220000.0,
+    "min_price_per_sqm": 82000,
+    "max_price_per_sqm": 560000,
+    "record_count": 112
+  },
+  {
+    "city_code": "12204",
+    "city_name": "船橋市",
+    "prefecture_name": "千葉県",
+    "year": 2023,
+    "avg_price_per_sqm": 228000.0,
+    "min_price_per_sqm": 85000,
+    "max_price_per_sqm": 580000,
+    "record_count": 113
+  },
+  {
+    "city_code": "12204",
+    "city_name": "船橋市",
+    "prefecture_name": "千葉県",
+    "year": 2024,
+    "avg_price_per_sqm": 236000.0,
+    "min_price_per_sqm": 88000,
+    "max_price_per_sqm": 600000,
+    "record_count": 113
+  },
+  {
+    "city_code": "12217",
+    "city_name": "柏市",
+    "prefecture_name": "千葉県",
+    "year": 2022,
+    "avg_price_per_sqm": 168000.0,
+    "min_price_per_sqm": 58000,
+    "max_price_per_sqm": 380000,
+    "record_count": 89
+  },
+  {
+    "city_code": "12217",
+    "city_name": "柏市",
+    "prefecture_name": "千葉県",
+    "year": 2023,
+    "avg_price_per_sqm": 171000.0,
+    "min_price_per_sqm": 59000,
+    "max_price_per_sqm": 388000,
+    "record_count": 89
+  },
+  {
+    "city_code": "12217",
+    "city_name": "柏市",
+    "prefecture_name": "千葉県",
+    "year": 2024,
+    "avg_price_per_sqm": 169000.0,
+    "min_price_per_sqm": 58000,
+    "max_price_per_sqm": 382000,
+    "record_count": 88
+  }
+]
