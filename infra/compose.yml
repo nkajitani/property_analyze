@@ -16,7 +16,7 @@ services:
     image: base-claude
     volumes:
       - ./.claude:/root/.claude
-      - .:/app
+      - .:/work
       # ベースとなるエージェント・スキルのみマウント先を切り替え
       - ~/docker/claude/base/.claude/agents:/root/.claude/agents
       - ~/docker/claude/base/.claude/skills:/root/.claude/skills
