@@ -1,0 +1,25 @@
+services:
+  terraform_with_terragrunt:
+    build:
+      context: .
+      dockerfile: dockerfile/terraform_with_terragrunt/Dockerfile
+    volumes:
+      - .:/work
+      - ~/.aws:/root/.aws:ro
+    working_dir: /work
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-ap-northeast-1}
+
+  claude:
+    image: base-claude
+    volumes:
+      - ./.claude:/root/.claude
+      - .:/app
+      # ベースとなるエージェント・スキルのみマウント先を切り替え
+      - ~/docker/claude/base/.claude/agents:/root/.claude/agents
+      - ~/docker/claude/base/.claude/skills:/root/.claude/skills
+      - ~/docker/claude/base/.claude/CLAUDE.md:/root/.claude/CLAUDE.md
+      - ~/docker/claude/base/.claude/settings.json:/root/.claude/settings.json
+      - ~/docker/claude/base/.claude/statusline-command.sh:/root/.claude/statusline-command.sh
