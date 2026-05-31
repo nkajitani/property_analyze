@@ -5,6 +5,7 @@ services:
       dockerfile: dockerfile/terraform_with_terragrunt/Dockerfile
     volumes:
       - .:/work
+      - ../.git:/work/.git
       - ~/.aws:/root/.aws:ro
     working_dir: /work
     environment:

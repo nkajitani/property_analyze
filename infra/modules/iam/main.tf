@@ -166,8 +166,7 @@ data "aws_iam_policy_document" "github_actions_deploy" {
     effect = "Allow"
     actions = ["iam:PassRole"]
     resources = [
-      aws_iam_role.ecs_task_execution.arn,
-      aws_iam_role.ecs_task.arn,
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/*",
     ]
   }
 }
