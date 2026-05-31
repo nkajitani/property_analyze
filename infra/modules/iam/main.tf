@@ -69,3 +69,120 @@ resource "aws_iam_role_policy_attachment" "ecs_task_secrets" {
   role       = aws_iam_role.ecs_task.name
   policy_arn = aws_iam_policy.ecs_task_secrets.arn
 }
+
+# ---------- GitHub Actions OIDC デプロイロール ----------
+# GitHub Actions から OIDC でスイッチして ECR push / ECS デプロイを行うロール
+
+data "aws_caller_identity" "current" {}
+
+data "aws_iam_openid_connect_provider" "github" {
+  count = var.github_oidc_provider_arn != "" ? 0 : 1
+  url   = "https://token.actions.githubusercontent.com"
+}
+
+locals {
+  oidc_provider_arn = var.github_oidc_provider_arn != "" ? var.github_oidc_provider_arn : data.aws_iam_openid_connect_provider.github[0].arn
+}
+
+data "aws_iam_policy_document" "github_actions_assume" {
+  statement {
+    effect = "Allow"
+    principals {
+      type        = "Federated"
+      identifiers = [local.oidc_provider_arn]
+    }
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    condition {
+      test     = "StringEquals"
+      variable = "token.actions.githubusercontent.com:aud"
+      values   = ["sts.amazonaws.com"]
+    }
+    condition {
+      test     = "StringLike"
+      variable = "token.actions.githubusercontent.com:sub"
+      values   = ["repo:${var.github_repo}:*"]
+    }
+  }
+}
+
+resource "aws_iam_role" "github_actions_deploy" {
+  name               = "${var.name_prefix}-github-actions-deploy-role"
+  assume_role_policy = data.aws_iam_policy_document.github_actions_assume.json
+
+  tags = merge(var.common_tags, {
+    Name = "${var.name_prefix}-github-actions-deploy-role"
+  })
+}
+
+data "aws_iam_policy_document" "github_actions_deploy" {
+  statement {
+    sid    = "ECRAuth"
+    effect = "Allow"
+    actions = [
+      "ecr:GetAuthorizationToken",
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    sid    = "ECRPush"
+    effect = "Allow"
+    actions = [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:CompleteLayerUpload",
+      "ecr:InitiateLayerUpload",
+      "ecr:PutImage",
+      "ecr:UploadLayerPart",
+      "ecr:BatchGetImage",
+      "ecr:GetDownloadUrlForLayer",
+    ]
+    resources = [
+      "arn:aws:ecr:${var.aws_region}:${data.aws_caller_identity.current.account_id}:repository/${var.project}/*",
+    ]
+  }
+
+  statement {
+    sid    = "ECSDescribe"
+    effect = "Allow"
+    actions = [
+      "ecs:DescribeTaskDefinition",
+      "ecs:DescribeServices",
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    sid    = "ECSDeployService"
+    effect = "Allow"
+    actions = [
+      "ecs:RegisterTaskDefinition",
+      "ecs:UpdateService",
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    sid    = "PassExecutionRole"
+    effect = "Allow"
+    actions = ["iam:PassRole"]
+    resources = [
+      aws_iam_role.ecs_task_execution.arn,
+      aws_iam_role.ecs_task.arn,
+    ]
+  }
+}
+
+resource "aws_iam_policy" "github_actions_deploy" {
+  name        = "${var.name_prefix}-github-actions-deploy-policy"
+  description = "GitHub Actions が ECR push と ECS デプロイを行うためのポリシー"
+  policy      = data.aws_iam_policy_document.github_actions_deploy.json
+
+  tags = merge(var.common_tags, {
+    Name = "${var.name_prefix}-github-actions-deploy-policy"
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "github_actions_deploy" {
+  role       = aws_iam_role.github_actions_deploy.name
+  policy_arn = aws_iam_policy.github_actions_deploy.arn
+}

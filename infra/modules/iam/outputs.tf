@@ -17,3 +17,8 @@ output "ecs_task_role_name" {
   description = "ECS タスクロールの名前"
   value       = aws_iam_role.ecs_task.name
 }
+
+output "github_actions_deploy_role_arn" {
+  description = "GitHub Actions デプロイロールの ARN（AWS_DEPLOY_ROLE_ARN シークレットに設定する）"
+  value       = aws_iam_role.github_actions_deploy.arn
+}

@@ -38,4 +38,8 @@ locals {
 
   # ---------- S3 ----------
   s3_enable_versioning = false
+
+  # ---------- GitHub Actions OIDC ----------
+  # GitHub リポジトリ（owner/repo 形式）に書き換えてください
+  github_repo = "nkajitani/property_analyze"
 }
