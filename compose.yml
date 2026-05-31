@@ -1,0 +1,11 @@
+services:
+  awscli:
+    image: amazon/aws-cli:latest
+    volumes:
+      - ./app/frontend/public:/data
+      - ./scripts:/scripts
+    entrypoint: ["/bin/sh", "/scripts/upload_geo.sh"]
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-ap-northeast-1}
