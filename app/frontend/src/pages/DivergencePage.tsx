@@ -17,11 +17,6 @@ import type { CityPriceDivergence, TownPriceDivergence } from '../types/divergen
 type Level = 'city' | 'town';
 type DivergenceItem = CityPriceDivergence | TownPriceDivergence;
 
-interface TooltipPayloadEntry {
-  name: string;
-  value: number;
-  color: string;
-}
 
 interface ChartDataPoint {
   year: number;
@@ -290,8 +285,8 @@ export default function DivergencePage() {
                   <Tooltip
                     contentStyle={{ background: 'rgba(6,13,31,0.95)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px' }}
                     labelStyle={{ color: '#94a3b8', fontSize: 12 }}
-                    formatter={(value: number, name: string, _: unknown, __: unknown, payload?: TooltipPayloadEntry) => {
-                      const color = payload?.color ?? '#94a3b8';
+                    formatter={(value: number, name: string, entry: { color?: string }) => {
+                      const color = entry?.color ?? '#94a3b8';
                       return [<span key={name} style={{ color }}>{value.toFixed(1)}%</span>, name];
                     }}
                   />

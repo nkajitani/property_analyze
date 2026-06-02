@@ -1,6 +1,6 @@
 FROM oven/bun:1.1-alpine
 
-WORKDIR /app
+WORKDIR /work
 
 COPY package.json bun.lockb* ./
 RUN bun install

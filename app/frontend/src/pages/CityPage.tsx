@@ -22,11 +22,6 @@ const PREF_NAMES: Record<string, string> = {
   '11': '埼玉県', '12': '千葉県', '13': '東京都', '14': '神奈川県',
 };
 
-interface TooltipPayloadEntry {
-  name: string;
-  value: number;
-  color: string;
-}
 
 interface ChartDataPoint {
   year: number;
@@ -290,8 +285,8 @@ export default function CityPage({ cityCode }: Props) {
               <Tooltip
                 contentStyle={{ background: 'rgba(6,13,31,0.95)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px' }}
                 labelStyle={{ color: '#94a3b8', fontSize: 12 }}
-                formatter={(value: number, name: string, _: unknown, __: unknown, payload?: TooltipPayloadEntry) => {
-                  const color = payload?.color ?? '#94a3b8';
+                formatter={(value: number, name: string, entry: { color?: string }) => {
+                  const color = entry?.color ?? '#94a3b8';
                   return [<span key={name} style={{ color }}>{value.toLocaleString()}円/㎡</span>, name];
                 }}
               />

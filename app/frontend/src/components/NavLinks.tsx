@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 
 function NavLink({ to, extraMatch, children }: { to: string; extraMatch?: string; children: ReactNode }) {
   const pathname = usePathname();
-  const active = pathname === to || (extraMatch ? pathname.startsWith(extraMatch) : false);
+  const active = pathname === to || (extraMatch ? (pathname?.startsWith(extraMatch) ?? false) : false);
   return (
     <Link
       href={to}

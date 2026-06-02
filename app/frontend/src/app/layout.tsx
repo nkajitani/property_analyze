@@ -2,7 +2,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google';
 import type { ReactNode } from 'react';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './globals.css';
-import NavLinks from '../src/components/NavLinks';
+import NavLinks from '@/components/NavLinks';
 
 const inter = Inter({
   subsets: ['latin'],

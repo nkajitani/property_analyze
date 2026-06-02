@@ -1,4 +1,4 @@
-import PrefecturePage from '../../../src/pages/PrefecturePage';
+import PrefecturePage from '@/pages/PrefecturePage';
 
 interface Props {
   params: Promise<{ code: string }>;

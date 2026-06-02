@@ -1,4 +1,4 @@
-import CityPage from "../../../../../src/pages/CityPage";
+import CityPage from '@/pages/CityPage';
 
 export default async function Page({
   params,
