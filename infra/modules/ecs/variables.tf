@@ -105,7 +105,17 @@ variable "backend_container_port" {
 
 variable "db_secret_arn" {
   type        = string
-  description = "DB 接続情報を含む Secrets Manager シークレットの ARN"
+  description = "DB パスワードを含む Secrets Manager シークレットの ARN"
+}
+
+variable "database_url_secret_arn" {
+  type        = string
+  description = "DATABASE_URL を含む Secrets Manager シークレットの ARN"
+}
+
+variable "admin_token_secret_arn" {
+  type        = string
+  description = "ADMIN_TOKEN を含む Secrets Manager シークレットの ARN"
 }
 
 variable "db_host" {

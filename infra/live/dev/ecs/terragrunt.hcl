@@ -59,7 +59,9 @@ dependency "secretsmanager" {
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
-    db_password_secret_arn = "arn:aws:secretsmanager:ap-northeast-1:123456789012:secret:mock"
+    db_password_secret_arn  = "arn:aws:secretsmanager:ap-northeast-1:123456789012:secret:mock-db"
+    database_url_secret_arn = "arn:aws:secretsmanager:ap-northeast-1:123456789012:secret:mock-dburl"
+    admin_token_secret_arn  = "arn:aws:secretsmanager:ap-northeast-1:123456789012:secret:mock-token"
   }
 }
 
@@ -75,6 +77,9 @@ inputs = {
   ecr_frontend_image        = "${dependency.ecr.outputs.frontend_repository_url}:latest"
   ecr_backend_image         = "${dependency.ecr.outputs.backend_repository_url}:latest"
   db_secret_arn             = dependency.secretsmanager.outputs.db_password_secret_arn
+  database_url_secret_arn   = dependency.secretsmanager.outputs.database_url_secret_arn
+  admin_token_secret_arn    = dependency.secretsmanager.outputs.admin_token_secret_arn
+  frontend_container_port   = 3000
   db_host                   = dependency.rds.outputs.db_instance_address
   aws_region                = local.region
   common_tags = {

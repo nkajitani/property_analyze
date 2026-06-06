@@ -81,7 +81,11 @@ data "aws_iam_policy_document" "secrets_access" {
   statement {
     effect    = "Allow"
     actions   = ["secretsmanager:GetSecretValue"]
-    resources = [var.db_secret_arn]
+    resources = [
+      var.db_secret_arn,
+      var.database_url_secret_arn,
+      var.admin_token_secret_arn,
+    ]
   }
 }
 
@@ -271,6 +275,14 @@ resource "aws_ecs_task_definition" "backend" {
         {
           name      = "DB_PASSWORD"
           valueFrom = var.db_secret_arn
+        },
+        {
+          name      = "DATABASE_URL"
+          valueFrom = var.database_url_secret_arn
+        },
+        {
+          name      = "ADMIN_TOKEN"
+          valueFrom = var.admin_token_secret_arn
         }
       ]
 

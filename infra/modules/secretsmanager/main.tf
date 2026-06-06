@@ -26,6 +26,50 @@ resource "aws_secretsmanager_secret_version" "db_password" {
   }
 }
 
+# ---------- DATABASE_URL シークレット ----------
+
+resource "aws_secretsmanager_secret" "database_url" {
+  name                    = "${var.name_prefix}/database_url"
+  description             = "${var.project} ${var.env} 環境の DATABASE_URL"
+  recovery_window_in_days = var.recovery_window_in_days
+
+  tags = merge(var.common_tags, {
+    Name    = "${var.name_prefix}/database_url"
+    Purpose = "database-url"
+  })
+}
+
+resource "aws_secretsmanager_secret_version" "database_url" {
+  secret_id     = aws_secretsmanager_secret.database_url.id
+  secret_string = "CHANGE_ME"
+
+  lifecycle {
+    ignore_changes = [secret_string]
+  }
+}
+
+# ---------- ADMIN_TOKEN シークレット ----------
+
+resource "aws_secretsmanager_secret" "admin_token" {
+  name                    = "${var.name_prefix}/admin_token"
+  description             = "${var.project} ${var.env} 環境の ADMIN_TOKEN"
+  recovery_window_in_days = var.recovery_window_in_days
+
+  tags = merge(var.common_tags, {
+    Name    = "${var.name_prefix}/admin_token"
+    Purpose = "admin-token"
+  })
+}
+
+resource "aws_secretsmanager_secret_version" "admin_token" {
+  secret_id     = aws_secretsmanager_secret.admin_token.id
+  secret_string = "CHANGE_ME"
+
+  lifecycle {
+    ignore_changes = [secret_string]
+  }
+}
+
 # ---------- API キーシークレット ----------
 
 resource "aws_secretsmanager_secret" "api_key" {
