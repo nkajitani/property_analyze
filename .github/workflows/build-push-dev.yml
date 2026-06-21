@@ -56,29 +56,9 @@
         - name: Sync static assets to S3
           if: matrix.service == 'frontend'
           run: |
-            # コンテナイメージからビルド成果物を取り出す
             docker create --name extract ${{ steps.meta.outputs.repo }}:latest
             docker cp extract:/work/.next/static ./static
             docker cp extract:/work/public ./public
             docker rm extract
             aws s3 sync ./static/ s3://${{ env.S3_BUCKET }}/_next/static/ --delete
             aws s3 sync ./public/ s3://${{ env.S3_BUCKET }}/ --delete
-
-        - name: Deploy to ECS
-          run: |
-            SERVICE=rei-${{ matrix.service }}-${{ env.ENV }}
-            TASK_DEF=$(aws ecs describe-task-definition \
-              --task-definition ${SERVICE} \
-              --query 'taskDefinition' \
-              --output json)
-            NEW_TASK_DEF=$(echo $TASK_DEF | jq \
-              --arg IMAGE "${{ steps.meta.outputs.repo }}:${{ steps.meta.outputs.tag }}" \
-              '.containerDefinitions[0].image = $IMAGE | del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .placementConstraints, .compatibilities, .registeredAt, .registeredBy)')
-            NEW_TASK_ARN=$(aws ecs register-task-definition \
-              --cli-input-json "$NEW_TASK_DEF" \
-              --query 'taskDefinition.taskDefinitionArn' \
-              --output text)
-            aws ecs update-service \
-              --cluster ${{ env.ECS_CLUSTER }} \
-              --service ${SERVICE} \
-              --task-definition ${NEW_TASK_ARN}
