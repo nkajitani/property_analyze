@@ -60,5 +60,5 @@
             docker cp extract:/work/.next/static ./static
             docker cp extract:/work/public ./public
             docker rm extract
-            aws s3 sync ./static/ s3://${{ env.S3_BUCKET }}/_next/static/ --delete
-            aws s3 sync ./public/ s3://${{ env.S3_BUCKET }}/ --delete
+            aws s3 sync ./static/ s3://${{ env.S3_BUCKET }}/_next/static/
+            aws s3 sync ./public/ s3://${{ env.S3_BUCKET }}/ --delete --exclude "_next/*"
