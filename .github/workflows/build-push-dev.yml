@@ -1,51 +1,84 @@
-name: Build & Push to ECR (dev)
+  name: Build & Push to ECR (dev)
 
-on:
-  workflow_dispatch:
+  on:
+    workflow_dispatch:
 
-env:
-  AWS_REGION: ap-northeast-1
-  PROJECT: rei
+  env:
+    AWS_REGION: ap-northeast-1
+    PROJECT: rei
+    ENV: dev
+    S3_BUCKET: rei-static-dev-live
+    ECS_CLUSTER: rei-ecs-dev
 
-jobs:
-  build-and-push:
-    name: Build & Push (${{ matrix.service }})
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        service: [frontend, backend]
-      fail-fast: false
+  jobs:
+    build-and-push:
+      name: Build & Push (${{ matrix.service }})
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          service: [frontend, backend]
+        fail-fast: false
 
-    permissions:
-      id-token: write
-      contents: read
+      permissions:
+        id-token: write
+        contents: read
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
 
-      - name: Configure AWS credentials (OIDC)
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
-          aws-region: ${{ env.AWS_REGION }}
+        - name: Configure AWS credentials (OIDC)
+          uses: aws-actions/configure-aws-credentials@v4
+          with:
+            role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+            aws-region: ${{ env.AWS_REGION }}
 
-      - name: Login to ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+        - name: Login to ECR
+          id: login-ecr
+          uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Set image metadata
-        id: meta
-        run: |
-          SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          echo "tag=${SHA}" >> "$GITHUB_OUTPUT"
-          echo "repo=${{ steps.login-ecr.outputs.registry }}/${{ env.PROJECT }}/${{ matrix.service }}" >> "$GITHUB_OUTPUT"
+        - name: Set image metadata
+          id: meta
+          run: |
+            SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+            echo "tag=${SHA}" >> "$GITHUB_OUTPUT"
+            echo "repo=${{ steps.login-ecr.outputs.registry }}/${{ env.PROJECT }}/${{ matrix.service }}" >> "$GITHUB_OUTPUT"
 
-      - name: Build & push image
-        uses: docker/build-push-action@v5
-        with:
-          context: app/${{ matrix.service }}
-          push: true
-          tags: |
-            ${{ steps.meta.outputs.repo }}:latest
-            ${{ steps.meta.outputs.repo }}:${{ steps.meta.outputs.tag }}
+        - name: Build & push image
+          uses: docker/build-push-action@v5
+          with:
+            context: app/${{ matrix.service }}
+            push: true
+            tags: |
+              ${{ steps.meta.outputs.repo }}:latest
+              ${{ steps.meta.outputs.repo }}:${{ steps.meta.outputs.tag }}
+
+        - name: Sync static assets to S3
+          if: matrix.service == 'frontend'
+          run: |
+            # コンテナイメージからビルド成果物を取り出す
+            docker create --name extract ${{ steps.meta.outputs.repo }}:latest
+            docker cp extract:/work/.next/static ./static
+            docker cp extract:/work/public ./public
+            docker rm extract
+            aws s3 sync ./static/ s3://${{ env.S3_BUCKET }}/_next/static/ --delete
+            aws s3 sync ./public/ s3://${{ env.S3_BUCKET }}/ --delete
+
+        - name: Deploy to ECS
+          run: |
+            SERVICE=rei-${{ matrix.service }}-${{ env.ENV }}
+            TASK_DEF=$(aws ecs describe-task-definition \
+              --task-definition ${SERVICE} \
+              --query 'taskDefinition' \
+              --output json)
+            NEW_TASK_DEF=$(echo $TASK_DEF | jq \
+              --arg IMAGE "${{ steps.meta.outputs.repo }}:${{ steps.meta.outputs.tag }}" \
+              '.containerDefinitions[0].image = $IMAGE | del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .placementConstraints, .compatibilities, .registeredAt, .registeredBy)')
+            NEW_TASK_ARN=$(aws ecs register-task-definition \
+              --cli-input-json "$NEW_TASK_DEF" \
+              --query 'taskDefinition.taskDefinitionArn' \
+              --output text)
+            aws ecs update-service \
+              --cluster ${{ env.ECS_CLUSTER }} \
+              --service ${SERVICE} \
+              --task-definition ${NEW_TASK_ARN}

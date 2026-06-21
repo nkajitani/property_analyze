@@ -6,6 +6,12 @@ locals {
   }
 }
 
+import {
+  for_each = local.repositories
+  id       = each.value
+  to       = aws_ecr_repository.main[each.key]
+}
+
 resource "aws_ecr_repository" "main" {
   for_each = local.repositories
 

@@ -13,7 +13,7 @@ terraform {
 }
 
 dependency "vpc" {
-  config_path = "../vpc"
+  config_path = "../../runtime/vpc"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -23,9 +23,10 @@ dependency "vpc" {
 }
 
 dependency "secretsmanager" {
-  config_path = "../secretsmanager"
+  config_path = "../../runtime/secretsmanager"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
+  mock_outputs_merge_strategy_with_state  = "shallow"
   mock_outputs = {
     db_password_secret_arn = "arn:aws:secretsmanager:ap-northeast-1:123456789012:secret:mock"
   }

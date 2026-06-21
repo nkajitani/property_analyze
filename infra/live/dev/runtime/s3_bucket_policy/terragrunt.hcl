@@ -13,7 +13,7 @@ terraform {
 }
 
 dependency "s3" {
-  config_path = "../s3"
+  config_path = "../../permanent/s3"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -23,7 +23,7 @@ dependency "s3" {
 }
 
 dependency "cloudfront" {
-  config_path = "../cloudfront"
+  config_path = "../../runtime/cloudfront"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {

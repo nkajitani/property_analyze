@@ -3,6 +3,26 @@ locals {
   tags        = merge(var.common_tags, { Module = "s3" })
 }
 
+import {
+  id = local.bucket_name
+  to = aws_s3_bucket.main
+}
+
+import {
+  id = local.bucket_name
+  to = aws_s3_bucket_public_access_block.main
+}
+
+import {
+  id = local.bucket_name
+  to = aws_s3_bucket_versioning.main
+}
+
+import {
+  id = local.bucket_name
+  to = aws_s3_bucket_server_side_encryption_configuration.main
+}
+
 # ---------------------------------------------------------------------------
 # S3 Bucket（静的アセット用）
 # ---------------------------------------------------------------------------

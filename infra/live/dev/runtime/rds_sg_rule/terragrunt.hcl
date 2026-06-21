@@ -13,7 +13,7 @@ terraform {
 }
 
 dependency "rds" {
-  config_path = "../rds"
+  config_path = "../../runtime/rds"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -22,7 +22,7 @@ dependency "rds" {
 }
 
 dependency "ecs" {
-  config_path = "../ecs"
+  config_path = "../../runtime/ecs"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {

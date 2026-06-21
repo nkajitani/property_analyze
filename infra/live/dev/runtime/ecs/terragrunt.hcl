@@ -14,7 +14,7 @@ terraform {
 }
 
 dependency "vpc" {
-  config_path = "../vpc"
+  config_path = "../../runtime/vpc"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -25,7 +25,7 @@ dependency "vpc" {
 }
 
 dependency "ecr" {
-  config_path = "../ecr"
+  config_path = "../../permanent/ecr"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -35,7 +35,7 @@ dependency "ecr" {
 }
 
 dependency "alb" {
-  config_path = "../alb"
+  config_path = "../../runtime/alb"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -46,7 +46,7 @@ dependency "alb" {
 }
 
 dependency "rds" {
-  config_path = "../rds"
+  config_path = "../../runtime/rds"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -55,9 +55,10 @@ dependency "rds" {
 }
 
 dependency "secretsmanager" {
-  config_path = "../secretsmanager"
+  config_path = "../../runtime/secretsmanager"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
+  mock_outputs_merge_strategy_with_state  = "shallow"
   mock_outputs = {
     db_password_secret_arn  = "arn:aws:secretsmanager:ap-northeast-1:123456789012:secret:mock-db"
     database_url_secret_arn = "arn:aws:secretsmanager:ap-northeast-1:123456789012:secret:mock-dburl"

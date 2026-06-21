@@ -13,7 +13,7 @@ terraform {
 }
 
 dependency "s3" {
-  config_path = "../s3"
+  config_path = "../../permanent/s3"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -23,7 +23,7 @@ dependency "s3" {
 }
 
 dependency "alb" {
-  config_path = "../alb"
+  config_path = "../../runtime/alb"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -32,7 +32,7 @@ dependency "alb" {
 }
 
 dependency "acm_validation" {
-  config_path = "../acm_validation"
+  config_path = "../../permanent/acm_validation"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -41,7 +41,7 @@ dependency "acm_validation" {
 }
 
 dependency "acm" {
-  config_path = "../acm"
+  config_path = "../../permanent/acm"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {

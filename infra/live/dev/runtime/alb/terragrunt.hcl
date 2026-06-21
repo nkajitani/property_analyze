@@ -13,7 +13,7 @@ terraform {
 }
 
 dependency "vpc" {
-  config_path = "../vpc"
+  config_path = "../../runtime/vpc"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
@@ -23,7 +23,7 @@ dependency "vpc" {
 }
 
 dependency "acm_validation" {
-  config_path = "../acm_validation"
+  config_path = "../../permanent/acm_validation"
 
   mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
